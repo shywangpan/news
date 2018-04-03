@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<script language="javascript" src="../static/js/jquery-3.1.1.js">
+</script>
+{literal}
+<style>
+table,tr,td{margin:0;
+   padding:0;
+   border:0px solid #ccc
+}
+</style>
+{/literal}
+<body>
+<h1><a href='index.php'>回到首页</a></h1>
+ <h1> <a href="goods_gallery.php?act=list">商品图片列表</a></h1>
+ 
+ <form action="goods_gallery.php?act=add&id={$smarty.get.id}" enctype="multipart/form-data" method="post">
+ <input type="hidden" value="1" id="seq" name="seq">
+ <table border="1">
+  <tr id="tr1" class="clas1">
+    <td><a href="javascript:;" id="firsttr"><img src="../static/imgs/add.png"><a/></td>
+    <td>图片描述:</td> <td><input type="text" name="img_discription[]" value=""></td>
+    <td>图片</td><td><input type="file" name="img_position[]" value=""> </td>
+    <td>或者外部链接</td>  <td><input type="text" name="out_href[]" value=""></td>
+  </tr>
+   
+   
+   <tr><td><input type="submit" id="sub" name="sub" value="保存"> </td></tr>
+</table>
+
+</form>
+
+</body>
+<script>
+$('#firsttr').click(function(){
+	var seq = parseInt($("#seq").val()) + 1 ; //点击时候hidden本身的value+1
+	$("#seq").val(seq);                       //把加1后的值再赋给自己 
+	
+	var html = '<tr id="tr1" class="clas'+seq+'"><td><a href="javascript:;" id="jian" onclick="jian('+seq+')"><img src="../static/imgs/minus.png"><a/></td><td>图片描述:</td> <td><input type="text" name="img_discription[]" value=""></td><td>图片</td><td><input type="file" name="img_position[]" value=""> </td><td>或者外部链接</td>  <td><input type="text" name="out_href[]" value=""></td></tr>';
+
+	$("#tr1").after(html);                   //给tr1加字符串元素
+	
+})
+function jian(seq){
+	$(".clas"+seq).remove();
+	var seq = parseInt($("#seq").val()) - 1;
+	$("#seq").val(seq);	
+}
+</script>
+
+</html>

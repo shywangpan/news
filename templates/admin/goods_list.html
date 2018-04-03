@@ -1,0 +1,267 @@
+{include file="../common/header.html"}
+<body>
+<form method="get" action="goods.php?act=list&id={$smarty.get.id}" id="listform" enctype="multipart/form-data">
+  <div class="panel admin-panel">
+    <div class="panel-head"><strong class="icon-reorder"> 商品列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
+    <div class="padding border-bottom">
+      <ul class="search" style="padding-left:10px;">
+        <li> <a class="button border-main icon-plus-square-o" href="goods.php?act=add"> 添加内容</a> </li>
+        <li></li>
+        <li>
+     
+          <li>
+            <select name="brand_id" class="input" style="width:200px; line-height:17px;" onChange="changesearch()">
+              <option value="">请选择商品品牌</option>
+               {$option_goods_brand}
+            </select>
+          </li>  
+        </li>
+        <if condition="$iscid eq 1">
+          <li>
+            <select name="classify_id" class="input" style="width:200px; line-height:17px;" onChange="changesearch()">
+              <option value="">请选择分类</option>
+              {$option_goods_classify}
+            </select>
+          </li>
+        </if>
+        <li>
+          <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input" style="width:250px; line-height:17px;display:inline-block" />
+           <td><input type="submit" class="button border-main icon-search" value="搜索" name="search" id="search">
+         
+     
+      </ul>
+    </div>
+</form>    
+    <table class="table table-hover text-center">
+      <tr>
+        <th width="100" style="text-align:left; padding-left:20px;">商品ID</th>
+        
+        <th>图片</th>
+        <th>商品名称</th>
+        <th>本店价格</th>  
+        <th>市场价格</th>
+         <th>上架下架</th>
+        <th>销量</th>
+        <th>库存</th> 
+
+       
+        <th width="10%">上架时间</th>
+
+ 
+       
+
+        <th width="310">操作</th>
+
+      </tr>
+    
+
+
+{foreach from=$list item=one}
+ <tr>
+          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />{$one.goods_id}</td>
+       
+          <td width="10%"><img src="../{$one.goods_pic}" alt="" width="70" height="50" /></td>
+          <td>{$one.goods_name}</td>
+          <td>{$one.shop_price}</td>  
+          <td>{$one.market_price}</td> 
+        <td>{if $one.is_shelves eq 1}上架{else}下架{/if}</td> 
+        <td>{$one.sales}</td> 
+        <td>{$one.count}</td>
+         <td>{$one.add_time}</td>
+          <td><div class="button-group"> <a class="button border-main" href="goods.php?act=add&id={$one.goods_id}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="
+          goods.php?act=delete&id={$one.goods_id}" onClick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+{/foreach}
+
+</tr>
+
+
+  
+        </tr>
+      <tr>
+        <td style="text-align:left; padding:19px 0;padding-left:20px;"><input type="checkbox" id="checkall"/>
+          全选 </td>
+        
+      </tr>
+      <tr>
+      <!-- <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td> -->
+         
+          <td colspan="8"><div class="pagelist"> {$showhtml} </div></td>
+      </tr>
+    </table>
+  </div>
+</form>
+<script type="text/javascript">
+
+//搜索
+function changesearch(){	
+		
+}
+
+//单个删除
+function del(id,mid,iscid){
+	if(confirm("您确定要删除吗?")){
+		return true;
+	}
+}
+
+//全选
+$("#checkall").click(function(){ 
+  $("input[name='id[]']").each(function(){
+	  if (this.checked) {
+		  this.checked = false;
+	  }
+	  else {
+		  this.checked = true;
+	  }
+  });
+})
+
+//批量删除
+function DelSelect(){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){
+		var t=confirm("您确认要删除选中的内容吗？");
+		if (t==false) return false;		
+		$("#listform").submit();		
+	}
+	else{
+		alert("请选择您要删除的内容!");
+		return false;
+	}
+}
+
+//批量排序
+function sorts(){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){	
+		
+		$("#listform").submit();		
+	}
+	else{
+		alert("请选择要操作的内容!");
+		return false;
+	}
+}
+
+
+//批量首页显示
+function changeishome(o){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){
+		
+		$("#listform").submit();	
+	}
+	else{
+		alert("请选择要操作的内容!");		
+	
+		return false;
+	}
+}
+
+//批量推荐
+function changeisvouch(o){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){
+		
+		
+		$("#listform").submit();	
+	}
+	else{
+		alert("请选择要操作的内容!");	
+		
+		return false;
+	}
+}
+
+//批量置顶
+function changeistop(o){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){		
+		
+		$("#listform").submit();	
+	}
+	else{
+		alert("请选择要操作的内容!");		
+	
+		return false;
+	}
+}
+
+
+//批量移动
+function changecate(o){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){		
+		
+		$("#listform").submit();		
+	}
+	else{
+		alert("请选择要操作的内容!");
+		
+		return false;
+	}
+}
+
+//批量复制
+function changecopy(o){
+	var Checkbox=false;
+	 $("input[name='id[]']").each(function(){
+	  if (this.checked==true) {		
+		Checkbox=true;	
+	  }
+	});
+	if (Checkbox){	
+		var i = 0;
+	    $("input[name='id[]']").each(function(){
+	  		if (this.checked==true) {
+				i++;
+			}		
+	    });
+		if(i>1){ 
+	    	alert("只能选择一条信息!");
+			$(o).find("option:first").prop("selected","selected");
+		}else{
+		
+			$("#listform").submit();		
+		}	
+	}
+	else{
+		alert("请选择要复制的内容!");
+		$(o).find("option:first").prop("selected","selected");
+		return false;
+	}
+}
+
+</script>
+</body>
+</html>

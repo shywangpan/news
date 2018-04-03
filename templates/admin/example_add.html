@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<script language="javascript" src="../static/js/jquery-3.1.1.js">
+</script>
+<body>
+<h1><a href='index.php' id='index'>首页</a></h1>
+  <h3><a href="example.php?act=list">案例列表</a></h3>
+<form action="example.php?act=add&id={$smarty.get.id}" method="post" enctype="multipart/form-data">
+  <input type="hidden" value="{$seq}" id="seq" name="seq">
+
+<table >
+   
+  <tr><td>案例标题</td>   <td><input type="text" name="title"  value="{$example.title}"></td></tr>
+  <tr><td>案例费用</td><td><input type="text" name="price" value="{$example.price}"></td></tr>
+  <tr><td>logo</td><td><input type="file" name="logo"></td></tr>
+  <tr><td>案例内容</td><td><textarea name="content" id="" cols="30" rows="10" >{$example.content}</textarea></td></tr>
+  <tr><td>设计方案</td><td><textarea name="plan" id="" cols="30" rows="10"  >{$example.plan}</textarea></td></tr>
+  
+   
+
+ 
+   {if $smarty.get.id > 0}
+  {$gallery_html}
+  {else}
+    <tr  class="class1">
+    <td><a href="javascript:;" id="first1"><img src="../static/imgs/add.png"><a/></td>
+    <td>图片描述:</td> <td><input type="text" name="gtitle[]" value=""></td>
+    <td>图片</td><td><input type="file" name="href[]" value=""> </td>
+     <td> <input type="hidden" id="imgid" name="imgid[]" value=""/></td>
+    </tr>
+  
+   {/if}
+
+   <tr><td><input type="submit" valu="保存"></td></tr>
+  
+ 
+
+   
+   
+</table>
+
+</form>
+
+</body>
+{literal}
+<script>
+
+
+
+
+
+$('#first1').click(function(){
+	var seq = parseInt($("#seq").val()) + 1 ; //点击时候hidden本身的value+1
+	$("#seq").val(seq);                       //把加1后的值再赋给自己 
+	var html = '<tr class="class'+seq+'"> <td><a href="javascript:;" id="first" onclick="jian('+seq+')"><img src="../static/imgs/minus.png"><a/></td> <td>图片描述:</td> <td><input type="text" name="gtitle[]" value=""></td><td>图片</td><td><input type="file" name="href[]" value=""> </td><td> <input type="hidden" id="imgid" name="imgid[]" value=""/></td></tr>';
+	$(".class1").after(html);                   //给tr1加字符串元素
+	
+})
+function jian(seq , id){ // goods_gallery的id 
+	$(".class"+seq).remove();
+	var seq = parseInt($("#seq").val()) - 1;
+	$("#seq").val(seq);
+	if(id > 0){
+		$.post('example.php?act=delimg&id='+id , null, function(rs){
+			//alert(rs) $.post('请求url',{请求数据}, 回调函数,返回数据格式)
+		},'text')
+	}
+}
+</script>
+{/literal}
+</html>

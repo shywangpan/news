@@ -1,0 +1,216 @@
+{include file="../common/header.html"}
+
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+  <div class="body-content">
+<form  class="form-x"  action="goods.php?act=add&id={$smarty.get.id}" method="post" enctype="multipart/form-data" onSubmit="return check_sub();" >  
+      <div class="form-group">
+        <div class="label">
+          <label>商品名称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="goods_name"  value="{$goods.goods_name}"  data-validate="required:请输入标题" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+      
+ 
+            <div class="form-group">
+          <div class="label">
+            <label>商品品牌：</label>
+          </div>
+          <div class="field">
+            <select name="brand_name" class="input w50">
+              <option value="0">顶级分类</option>
+               {$option_goods_brand}
+ 
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>
+        
+        
+                <div class="form-group">
+          <div class="label">
+            <label>商品分类：</label>
+          </div>
+          <div class="field">
+            <select name="cname" class="input w50">
+              <option value="0">顶级分类</option>
+              {$option_goods_classify }
+ 
+            </select>
+            <div class="tips"></div>
+          </div>
+        </div>
+      
+      
+      
+              <div class="form-group">
+      
+        </div>
+ 
+      <div class="form-group">
+        <div class="label">
+          <label>上传商品图片：</label>
+        </div>
+        <div class="field">
+        <input type="file" name="goods_pic" value="" id="goods_pic" onChange="changeSrc(this)">
+          <div class="tips"></div>
+        </div>
+      </div>
+   
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <!--
+      
+           
+        <div class="label">
+          <label>图片：</label>
+        </div>
+        <div class="field">
+          <input type="text" id="url1" name="img" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
+          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
+          <div class="tipss">图片尺寸：500*500</div>
+        </div>
+      </div>     
+      -->
+     
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+        
+        <div class="form-group">
+      
+        </div>
+ 
+      <div class="form-group">
+        <div class="label">
+          <label>商品简介：</label>
+        </div>
+        <div class="field">
+          <textarea class="input" name="goods_info" style=" height:90px;">{$goods.goods_info}</textarea>
+          <div class="tips"></div>
+        </div>
+      </div>
+   
+     
+     
+
+     
+     
+     
+         
+                  <div class="form-group">
+        <div class="label">
+          <label>本店价格：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="title" data-validate="member:只能为数字" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+      
+      
+                  <div class="form-group">
+        <div class="label">
+          <label>市场价格：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$goods.shop_price}" name="shop_price" data-validate="member:只能为数字" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+      
+      
+                  <div class="form-group">
+        <div class="label">
+          <label>销量：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$goods.sales}" name="sales" data-validate="member:只能为数字" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+      
+         <div class="form-group">
+        <div class="label">
+          <label>库存：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="{$goods.count}" name= "count" data-validate="member:只能为数字" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        
+     
+     
+       <div class="form-group">
+        <div class="label">
+          <label>商品描述：</label>
+        </div>
+        <div class="field">
+                         <div style="height:250px; border:0px solid #ddd;">{$FCKeditor}</div>
+          <!--<textarea name="content" class="input" style="height:450px; border:1px solid #ddd;"> {$FCKeditor}</textarea>-->
+          <div class="tips"></div>
+        </div>
+      </div>
+      
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+      <div class="form-group">
+        
+      </div>
+  
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body></html>

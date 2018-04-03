@@ -1,0 +1,86 @@
+ <!doctype html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title> 商品管理</title>
+ </head>
+<script language="javascript" src="../static/js/jquery-3.1.1.js">
+</script>
+{literal}
+ <style>
+ *{margin:0;
+   padding:0;
+  }
+ table{
+       width:960px;
+       /*height:400px;*/
+       border:1px solid #ccc;
+	   margin-top:15px
+ }
+ td{ border:1px solid #ccc}
+ td{width:300px;height:30px;}
+</style>
+{/literal}
+<body>
+<h1><a href="index.php">首页</a></h1>
+<form action="goods.php?act=list" id="from" method="get">
+<table width="500" border="1" >
+  <tr>
+    <td height="30"><select id="classify_id" name="classify_id">
+    <option value="">请选择</option>
+    {$option_goods_classify}
+    </select></td>
+    <td><select id="brand_id" name="brand_id">
+    <option value="">请选择</option>
+    {$option_goods_brand}
+    </select></td>
+    <td><input type="text" id="keyword" name="keyword"></td>
+    <td><input type="submit" value="搜索" name="search" id="search">
+    <A href="goods.php?act=list">取消搜索</A>
+    </td>
+  </tr>
+  
+</table>
+</form>
+
+<table>
+	<tr>
+		<td>商品id</td> 
+        <td>商品名称</td>  
+        <td>本店价格</td>  
+        <td>市场价格</td> 
+        <td>上架下架</td> 
+        <td>销量</td>
+        <td>库存</td> 
+        <td>商品图片</td>
+        <td>上架时间</td> 
+        <td>操作</td>
+	</tr>
+
+{foreach from=$list item=one}
+<tr>
+ 
+ 		<td>{$one.goods_id}</td> 
+        <td>{$one.goods_name}</td>  
+        <td>{$one.shop_price}</td>  
+        <td>{$one.market_price}</td> 
+        <td>{if $one.is_shelves eq 1}上架{else}下架{/if}</td> 
+        <td>{$one.sales}</td> 
+        <td>{$one.count}</td>
+        <td><img src="../{$one.goods_pic}" width=40 height=40></td>
+         <td>{$one.add_time}</td>
+         <td><a href="goods.php?act=add&id={$one.goods_id}">修改</a>
+<a href="goods.php?act=delete&id={$one.goods_id}">删除</a>  <a href="goods.php?act=update_goods_gallery&id={$one.goods_id}">编辑商品相册</a>
+{if $one.is_shelves eq 1}<A href="goods.php?act=online&id={$one.goods_id}&is_shelves=2&page={$smarty.get.page}">下架</A>{else}<A href="goods.php?act=online&id={$one.goods_id}&is_shelves=1&page={$smarty.get.page}">上架</A>{/if}
+</td>
+{/foreach}
+</tr>
+   
+   
+
+</table>
+{$showhtml}
+
+ 	
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理-添加广告位置</title>
+</head>
+<body>
+<h1><a href='index.php'>回到首页</a></h1>
+ <h1> <a href="ads_position.php?act=list">广告位置列表</a></h1>
+<table>
+
+<form action="ads_position.php?act=add&id={$smarty.get.id}" method="post">
+
+<tr> <td>广告位置名称</td>  <td><input name="pname" id="pname" value="{$ads_position.pname}"></td>           </tr>
+</table>
+<input type="submit">
+</form>
+</body>
+</html>

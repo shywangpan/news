@@ -1,0 +1,27 @@
+空间商地址http://www.lfeee.com/  帐号：shywangpan  密码:040602l009
+  
+
+网站域名：shywangpan.hk35.lfw.cn.com
+ftp :    shywangpan   040602l009wp	
+FTP地址：hk35.lfidc.net（建议）    hk35.ftp.lfidc.net
+
+
+数据库
+服务器IP：	　　localhost
+开通时间：	　　2016年3月18日
+到期时间：	　　2017年3月18日
+数据库软件类型：	　　MySQL5.0
+数据库名：	　　a0318174149
+数据库用户名：	　　a0318174149
+数据库密码：	　　040602l009wp
+连接端口：	　　 3306
+
+网站地址：http://shywangpan.hk35.lfw.cn.com/wangpan/
+          shywangpan
+          040602l009wp
+
+
+
+
+
+httpwww.lutong.so

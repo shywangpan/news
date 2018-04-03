@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理-幻灯片添加/修改</title>
+</head>
+<body>
+<h1><a href='index.php' id='index'>首页</a></h1>
+<h3><a href="web_focus.php?act=list">图片列表</a></h3>
+
+<table>
+      
+      <form action="web_focus.php?act=add&id={$smarty.get.id}" method="post" enctype="multipart/form-data">
+          <tr><td>图片名字:</td> <td><input type="text" name="title" id="title" value="{$web_focus_row.title}"></td>  </tr> 
+          <tr> <td>图片地址:</td><td><input type="file" name="href" id="href" value="{$web_focus_row.href}">  <img src="../{$web_focus_row.href} " width="30" height="30" alt=""></td></tr>
+          <tr><td>跳转地址:</td><td><input type="text" name="pic_url" id="pic_url" value="{$web_focus_row.pic_url}"></td></tr>
+          <tr><td>排序:</td>  <td><input type="text" name="sort_seq" id="sort_seq" value="{$web_focus_row.sort_seq}"></td></tr>
+          <tr><td><input type="submit"></td></tr>
+     </form>
+</table>
+
+
+</body>
+</html>

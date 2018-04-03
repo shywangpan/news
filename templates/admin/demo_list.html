@@ -1,0 +1,74 @@
+
+<!doctype html>
+<html lang="utf8">
+<head>
+</head>
+<script language="javascript" src="../static/js/jquery-3.1.1.js">
+</script>
+<body>
+	<h1><a href='index.php'>首页</a></h1>
+    <h2><a href='demo.php?act=add'>添加测试</a></h2>
+  
+  
+  <!--
+  <table>
+  {foreach from=$goods item=one}
+   <tr>
+  <td>{$one.goods_id}<td><a href="demo.php?act=add&goods_id={$one.goods_id}">修改</a> 
+  <tr>
+  {/foreach}
+  
+  </table>
+  
+  
+  
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+<table border="1">
+	<tr id="a10">   <td>  <a href="javascript:;"> a10 </a>  </td>  </tr>
+	{$html}
+</table>
+
+     -->
+     
+<form  action="demo.php?act=add" method="post"  enctype="multipart/form-data">  
+     
+			<input type ="file"  name="img[]"  id="file"><br>
+            <input type ="file"  name="img[]"  id="file"><br>
+            
+            
+            <input type ="file"  name="imgone"  id="file"><br>
+
+            <input type="submit">
+</form>  
+    
+</body>
+{literal}
+<script> 
+window.onload=function(){
+	$('#a0').click(function(){
+	
+html='<tr><td>  <a href="">a10</a>  </td></tr>';
+$("#a0").after(html);
+})
+
+	}
+
+
+</script>
+{/literal}
+</html>
+

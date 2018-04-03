@@ -1,0 +1,116 @@
+{include file="../common/header.html"}
+
+<!--<table>
+  <form action="news.php?act=add&id={$news.id}" method="post"  enctype="multipart/form-data" onSubmit=" return check_sub();">
+    <tr>
+        <td>
+          <select name="cid" id="cid">
+              <option value="0">请选择新闻分类</option>  
+              {$option}
+          </select>
+      </td>
+    </tr>
+    <tr>
+        <td>新闻标题:</td>
+        <td><input type="text" name="title" id="title" value="{$news.title}"></td>
+    </tr>
+    <tr>
+        <td>新闻简介:</td>
+        <td><textarea name="info" id="info" cols="20" rows="6" >{$news.info}</textarea>  </td>  
+   </tr>  
+        <tr>
+        <td>新闻logo:</td>
+        <td><input type="file" name="logo" id="logo" onChange="changeSrc(this)"> </td> 
+    </tr> 
+     <tr>
+        <td>新闻内容:</td>
+        <td>{$FCKeditor}</td>
+    </tr>
+    <tr>
+       <td><input type="submit" value="保存"></td>
+    </tr>
+  </form>
+</table> -->
+
+
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+  <div class="body-content">
+    <form action="news.php?act=add&id={$news.id}" method="post"  enctype="multipart/form-data" class="form-x" >  
+    
+    
+    <div class="form-group">
+          <div class="label">
+            <label>请选择新闻分类：</label>
+          </div>
+          <div class="field">
+            <select name="cid" class="input w50">
+            <option value="0">请选择新闻分类</option>  
+               {$option}
+            </select>
+            
+            <div class="tips"></div>
+          </div>
+        </div>
+    
+      <div class="form-group">
+        <div class="label">
+          <label>标题：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" name="title"  value="{$news.title}" data-validate="required:请输入标题" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      
+            <div class="form-group">
+        <div class="label">
+          <label>新闻logo：</label>
+        </div>
+        <div class="field">
+          <input type="file" name="logo"  class="input tips" style="width:25%; float:left; border:0px solid #ccc"  />
+          
+          <div class="tipss">图片尺寸：500*500</div>
+        </div>
+      </div> 
+      
+       <div class="form-group">
+        <div class="label">
+          <label>新闻简介：</label>
+        </div>
+        <div class="field">
+          <textarea class="input" name="info" style=" height:90px;">{$news.info}</textarea>
+          <div class="tips"></div>
+        </div>
+      </div>
+      
+      
+       <div class="form-group">
+        <div class="label">
+          <label>新闻内容：</label>
+        </div>
+        <div class="field">
+        {$FCKeditor}
+         
+          <div class="tips"></div>
+        </div>
+      </div>
+     
+       
+     
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+        <!--<input type="submit" class="button bg-main icon-check-square-o" />-->
+             <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+         
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body></html>

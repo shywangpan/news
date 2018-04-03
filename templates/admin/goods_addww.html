@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理-商品添加</title>
+</head>
+<script language="javascript" src="../static/js/jquery-3.1.1.js">
+</script>
+
+<script type="text/javascript">
+var right_type=new Array(".gif",".jpg",".jpeg",".png"); 
+function checkImgType(fileURL) 
+{ 
+	//本程序用来验证后缀，如果还有其它格式，可以添加在right_type; 
+	var right_typeLen=right_type.length; 
+	var imgUrl=fileURL.toLowerCase(); 
+	var postfixLen=imgUrl.length; 
+	var len4=imgUrl.substring(postfixLen-4,postfixLen); 
+	var len5=imgUrl.substring(postfixLen-5,postfixLen); 
+	for (i=0;i <right_typeLen;i++) 
+		{ 
+			if((len4==right_type[i])||(len5==right_type[i])) 
+			{ 
+				return true; 
+			} 
+		} 
+}
+function changeSrc(filePicker) 
+{ 
+	if(!checkImgType(filePicker.value)) 
+	{ 
+		alert("请上传正确格式/gif/jpg/jpeg/png！"); 
+		return false; 
+	}
+	return true;
+}
+
+
+function check_count(input) {
+　　var re = /^[0-9]+.?[0-9]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/
+　　var nubmer = $.trim(document.getElementById(input).value);
+
+　　if (!re.test(nubmer)) {
+　　　　alert("请输入数字");
+　　　　document.getElementById(input).value = "";
+　　　　return false;
+　　}
+   if(nubmer < 100)
+   {
+    alert('必须大于100')
+	document.getElementById(input).value = "";
+	return false;
+   }
+}
+
+function check_sub(){
+	var cname = $.trim(document.getElementById('cname').value);
+	if (cname == 0){
+		alert('请选择商品分类')
+		return false
+	}
+    var brand_name = document.getElementById('brand_name').value
+	if (brand_name == 0){
+		alert('请选择商品品牌')
+		return false
+	}
+	
+	var goods_name=document.getElementById('goods_name').value;
+	if (goods_name == ''){
+		alert('请输入商品名字');return false;
+	}
+   var re = /^[0-9]+.?[0-9]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/
+　　var nubmer = trim(document.getElementById("shop_price").value);
+　　if (!re.test(nubmer)) {
+　　　　alert("本店价格必须为数字");　return false;　
+　　}
+	
+	var  market_price = trim(document.getElementById("market_price").value);
+	
+	if (!re.test(market_price)) {
+　　　　alert("市场价格必须为数字");　return false;　
+　　}
+
+	//库存
+   /*
+   var count  = document.getElementById('count').value;
+
+　　if (!re.test(count)) {
+　　　　alert('库存必须为数字');
+　　　　return false;
+　　}
+   if(re.test(count) && count< 100)
+   {
+    alert('必须大于100')
+	//document.getElementById(input).value = "";
+	return false;
+   }
+   */
+   {if $smarty.get.id > 0}
+   var  goods_pic  = document.getElementById('goods_pic').value;
+   if ( goods_pic == ''){
+  	 alert('上传图片') ;
+  	 return false;
+   }
+   {/if}
+   var count  = $.trim($("#count").val());
+   if(count == ""){
+	   alert('库存不能为空') ;
+  	 return false;   
+   }
+   if (!re.test(count)) {
+　　　　alert("库存必须为数字");　return false;　
+　　}
+   if (parseInt(count) < 100){
+   	 alert('库存必须大于100') ;
+    	return false;
+   }
+	return true;
+}
+
+
+</script>
+
+<body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>goods</title>
+</head>
+<!--
+<style>
+{literal}
+*{margin:0;padding: 0}
+  input{width:150px;height:30px; display: ;margin-top: 5px} 
+  select{display: ;margin-top: 5px;width:150px;height:30px;}
+  textarea{margin-top:5px;} 
+#out{margin-right: 400px;display: block;margin-left:800px;margin-top: 50px}
+{/literal} 
+</style>
+-->
+
+<body>
+  <div id='out'>
+    <h1><a href="index.php">首页</a></h1>
+  <form action="goods.php?act=add&id={$smarty.get.id}" method="post" enctype="multipart/form-data" onSubmit="return check_sub();">
+        商品分类：
+        <select name="cname" id="cname">
+              <option value="0">顶级分类</option>
+              {$option_goods_classify }
+        </select><br>
+        商品品牌：  
+        <select name="brand_name" id="brand_name">
+             <option value="0">顶级分类</option>
+              {$option_goods_brand}
+        </select><br>
+       商品名称： <input type="text"  name="goods_name" id='goods_name' value="{$goods.goods_name}"><br>
+       商品简介： <textarea name="goods_info" id="" cols="30" rows="10" value="{$goods.goods_info}">可选</textarea><br>
+        本店价格：<input type="text"  name="shop_price" id="shop_price" value="{$goods.shop_price}" ><br>
+        市场价格：<input type="text" name="market_price"  id="market_price" value="{$goods.market_price}"><br>
+        上传商品图片：<input type="file" name="goods_pic" value="" id="goods_pic" onChange="changeSrc(this)">
+           {if $goods.goods_pic  !=""}
+        <a href="../{$goods.goods_pic}" target='_blank'><img src="../{$goods.goods_pic}" width="40" height="40" ></a>
+        <br><br><br>
+        {/if}
+        销量：<input type="text"  name="sales" value="{$goods.sales}"><br>
+        库存：<input type="text"  name= "count"  id='count' value="{$goods.count}" ><br><br>
+        
+        
+        商品描述:{$FCKeditor}
+          
+       
+       
+  <input type="hidden" value="{$seq}" id="seq" name="seq">
+ 
+ <table border="1">
+  {if $smarty.get.id > 0}
+  {$gallery_html}
+  {else}
+  <tr id="tr1" class="clas1">
+    <td><a href="javascript:;" id="firsttr"><img src="../static/imgs/add.png"><a/></td>
+    <td>图片描述:</td> <td><input type="text" name="img_discription[]" value=""></td>
+    <td>图片</td><td><input type="file" name="img_position[]" value=""> </td>
+    <input type="hidden" id="imgid" name="imgid[]" value=""/>
+    <td>或者外部链接</td>  <td><input type="text" name="out_href[]" value=""></td>
+  </tr>
+   {/if}
+   
+   <tr><td><input type="submit" id="sub" name="sub" value="保存"> </td></tr>
+</table>         
+
+
+  </form>
+
+</div>
+
+</body>
+</html>
+</body>
+{literal}
+<script>
+$('#firsttr').click(function(){
+	var seq = parseInt($("#seq").val()) + 1 ; //点击时候hidden本身的value+1
+	$("#seq").val(seq);                       //把加1后的值再赋给自己 
+	
+	var html = '<tr id="tr1" class="clas'+seq+'"><td><a href="javascript:;" id="jian" onclick="jian('+seq+',0)"><img src="../static/imgs/minus.png"><a/></td><td>图片描述:</td> <td><input type="text" name="img_discription[]" value=""></td><td>图片</td><input type="hidden" id="imgid" name="imgid[]" value=""/><td><input type="file" name="img_position[]" value=""> </td><td>或者外部链接</td>  <td><input type="text" name="out_href[]" value=""></td></tr>';
+
+	$("#tr1").after(html);                   //给tr1加字符串元素
+	
+})
+function jian(seq , id){ // goods_gallery的id 
+	$(".clas"+seq).remove();
+	var seq = parseInt($("#seq").val()) - 1;
+	$("#seq").val(seq);
+	if(id > 0){
+		$.post('goods.php?act=delimg&gid='+id , null, function(rs){
+			//alert(rs) $.post('请求url',{请求数据}, 回调函数,返回数据格式)
+		},'text')
+	}
+}
+</script>
+{/literal}
+<!-- 添加 
+1.第一行：单击 ，给后边加元素
+2.后边  ：单击，移除这个元素
+3.提交给PHP  它们的name="img_position[]",php取得它们元素的总数,for循环总数依次img_position[$i]"DB::insert() 
+-->
+<!--修改(和动态添加option一样) 
+if($act =='add')
+   if($id >0){
+    1.$rs = DB::GetQueryResult("select * from goods_gallery where goods_id=".$id , false); 取得相册
+    2.生成添加相册的html标签并分配值
+    3.加载到页面$smarty->assign()
+   }
+
+4.注意在html页面移除元素的时候也要把数据库的东西清空 
+-->
+</html>

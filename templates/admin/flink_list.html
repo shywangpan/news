@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1><a href='index.php'>回到首页</a></h1>
+<h1> <a href="flink.php?act=add">添加</a></h1>
+
+
+
+
+
+ <table border="1">
+      <tr>
+         <td>链接名字</td>
+         <td>链接地址</td>
+        <td>排序</td>
+         <td>logo图片</td>
+         <td>操作</td>
+      </tr>
+{foreach from=$list item=one}
+  <tr>
+  <td>{$one.link_name}</td>
+  <td> <a target="_blank" href="{$one.link_href}">{$one.link_href}</a></td> 
+  <td>{$one.order}</td>  
+  <td><a  target="_blank"><img src="../{$one.logo}"  alt="" width=50 height=50></a></td>     
+  <td> <a href="flink.php?act=delete&id={$one.id}">删除</a> <a href="flink.php?act=add&id={$one.id}">修改</a></td> 
+{/foreach}
+</tr>
+
+</table>{$showhtml}
+
+
+
+
+
+</body>
+</html>

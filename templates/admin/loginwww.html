@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台-登录</title>
+	<script type="text/javascript" src="../static/js/jquery.js"></script>
+	<script type="text/javascript">
+	function login(){
+		var username = $("#username").val();
+		var password = $("#password").val().value;
+		if(username == "" || (password == "")){
+			alert("帐号密码不能为空 "); return false;
+ 		}
+ 		$("#save").submit();
+	}
+	</script>
+</head>
+<body>
+	<form action="" method="post" id="save">
+		账户：<input type="text" name="username" id="username"><br>
+		密码：<input type="password" name="password" id="password"><br>
+		<a href="javascript:;" onclick="login();">登陆</a>
+	</form>
+</body>
+</html>

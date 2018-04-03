@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新闻分类管理</title>
+</head>
+<body>
+<h1><a href='index.php'>回到首页</a></h1>
+
+	<h1> <a href="news_class.php?act=add">添加新闻分类</a> </h1>
+	{foreach from=$list item=one}
+     <br>{$one.cname} <a href="news_class.php?act=delete&id={$one.id}" >删除</a>  |   <a href="news_class.php?act=add&id={$one.id}"> 修改</a> 
+     
+        {/foreach}
+    
+  <br>
+  {$showhtml}
+</body>
+</html>
